@@ -11,17 +11,13 @@ class ProductService {
     return axios.post(Product_URL + "/addProducts", Product);
   }
 
-  // createProduct(Product) {
-  //   return axios.post(Product_URL, Product);
-  // }
-
   getProductById(ProductId) {
     return axios.get(Product_URL + "/getProduct" + ProductId);
   }
 
-  //   updateProduct(Product, ProductId) {
-  //     return axios.put(Product_URL + "/" + ProductId, Product);
-  //   }
+  updateProduct(Product, ProductId) {
+    return axios.put(Product_URL + "/" + ProductId, Product);
+  }
 
   //   deleteProduct(ProductId) {
   //     return axios.delete(Product_URL + "/" + ProductId);

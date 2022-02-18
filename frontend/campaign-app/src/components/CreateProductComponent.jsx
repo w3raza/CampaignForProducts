@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import {Link, useParams  } from 'react-router-dom';
+import {Link, useNavigate , useParams  } from 'react-router-dom';
 import ProductService from '../services/ProductService';
-import Product from "./Product";
 
 const CreateProductComponent = () => {
     const [productName, setproductName] = useState('')
     const [productPrice, setproductPrice] = useState(0)
     const [campaigns, setcampaigns] = useState([])
-    const {id} = useParams();
+    const { id } = useParams();
+    let navigate = useNavigate();
     
    useEffect(() => {
 
@@ -27,16 +27,14 @@ const CreateProductComponent = () => {
 
         if(id){
             ProductService.updateproduct(id, product).then((response) => {
-                <Product/>
+                navigate('/product', { replace: true })
             }).catch(error => {
                 console.log(error)
             })
 
         }else{
-            ProductService.createproduct(product).then((response) =>{
-   
-               <Product/>
-    
+            ProductService.addProducts(product).then((response) => {
+                navigate('/product', { replace: true })
             }).catch(error => {
                 console.log(error)
             })
@@ -68,7 +66,7 @@ const CreateProductComponent = () => {
                                     <label className = "form-label"> First Name :</label>
                                     <input
                                         type = "text"
-                                        placeholder = "Enter first name"
+                                        placeholder = "Product name"
                                         name = "productName"
                                         className = "form-control"
                                         value = {productName}
@@ -80,8 +78,8 @@ const CreateProductComponent = () => {
                                 <div className = "form-group mb-2">
                                     <label className = "form-label"> Last Name :</label>
                                     <input
-                                        type = "text"
-                                        placeholder = "Enter last name"
+                                        type = "number"
+                                        placeholder = "Product Price"
                                         name = "productPrice"
                                         className = "form-control"
                                         value = {productPrice}
@@ -90,21 +88,8 @@ const CreateProductComponent = () => {
                                     </input>
                                 </div>
 
-                                <div className = "form-group mb-2">
-                                    <label className = "form-label"> Email Id :</label>
-                                    <input
-                                        type = "email"
-                                        placeholder = "Enter email Id"
-                                        name = "campaigns"
-                                        className = "form-control"
-                                        value = {campaigns}
-                                        onChange = {(e) => setcampaigns(e.target.value)}
-                                    >
-                                    </input>
-                                </div>
-
                                 <button className = "btn btn-success" onClick = {(e) => saveOrUpdateproduct(e)} >Submit </button>
-                                <Link to="/products" className="btn btn-danger"> Cancel </Link>
+                                <Link to="/product" className="btn btn-danger"> Cancel </Link>
                             </form>
 
                         </div>
