@@ -25,6 +25,13 @@ class ProductService {
   deleteProduct(ProductId) {
     return axios.delete(Product_URL + "/deleteProducts?index=" + ProductId);
   }
+
+  addCampaignToProduct(id, campaign) {
+    return axios.post(
+      Product_URL + "/addCampaignToProduct?index=" + id,
+      campaign
+    );
+  }
 }
 
 export default new ProductService();
