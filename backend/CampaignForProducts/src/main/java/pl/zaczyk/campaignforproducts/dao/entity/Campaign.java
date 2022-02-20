@@ -12,13 +12,9 @@ public class Campaign {
     private String keywords;
     private int minAmount;
     private BigDecimal campaignFund;
-    private boolean status;
+    private boolean status = false;
     private String townName;
     private double radius;
-
-    @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
 
     public Campaign() {
     }
@@ -32,7 +28,6 @@ public class Campaign {
         this.status = status;
         this.townName = townName;
         this.radius = radius;
-        this.product = product;
     }
 
     public Long getCampaignId() {
@@ -97,14 +92,6 @@ public class Campaign {
 
     public void setRadius(double radius) {
         this.radius = radius;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     @Override

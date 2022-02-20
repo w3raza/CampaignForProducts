@@ -39,8 +39,8 @@ public class ProductController {
     }
 
     @PutMapping("/updateProducts")
-    public Product updateProduct(@RequestBody Product product){
-        return productManager.updateProduct(product);
+    public Product updateProduct(@RequestBody Product product, @RequestParam Long index){
+        return productManager.updateProduct(product, index);
     }
 
     @DeleteMapping("/deleteProducts")
@@ -53,9 +53,9 @@ public class ProductController {
         return productManager.addCampaignToProduct(index, campaign);
     }
 
-    @GetMapping("/getCampaignsFromProduct")
-    public List<Campaign> getCampaignsFromProduct(@RequestParam Long index) {
-        return productManager.getCampaignsFromProduct(index);
-    }
+//    @GetMapping("/getCampaignsFromProduct")
+//    public Campaign getCampaignsFromProduct(@RequestParam Long index) {
+//        return productManager.getCampaignsFromProduct(index);
+//    }
 }
 

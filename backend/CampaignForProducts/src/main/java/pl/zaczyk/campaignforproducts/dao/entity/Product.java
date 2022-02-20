@@ -2,8 +2,6 @@ package pl.zaczyk.campaignforproducts.dao.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Product {
@@ -14,8 +12,19 @@ public class Product {
     private String productName;
     private BigDecimal productPrice;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Campaign> campaigns = new ArrayList<>();
+    @OneToOne
+    @JoinColumn(name = "campaigns_campaign_id")
+    Campaign campaign;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productPrice=" + productPrice +
+                ", campaigns=" + campaign +
+                '}';
+    }
 
     public Product() {
     }
@@ -50,15 +59,11 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public List<Campaign> getCampaigns() {
-        return campaigns;
+    public Campaign getCampaign() {
+        return campaign;
     }
 
-    public void setCampaigns(List<Campaign> campaigns) {
-        this.campaigns = campaigns;
-    }
-
-    public void assignCampaign(Campaign campaign) {
-        campaigns.add(campaign);
+    public void setCampaign(Campaign campaigns) {
+        this.campaign = campaigns;
     }
 }

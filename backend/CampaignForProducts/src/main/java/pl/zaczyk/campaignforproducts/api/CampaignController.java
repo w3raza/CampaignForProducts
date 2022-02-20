@@ -32,12 +32,14 @@ public class CampaignController {
 
     @PostMapping("/addCampaign")
     public Campaign addCampaign(@RequestBody Campaign campaign){
+
+        System.out.println(campaign);
         return campaignManager.saveCampaign(campaign);
     }
 
     @PutMapping("/updateCampaign")
-    public Campaign updateCampaign(@RequestBody Campaign campaign){
-        return campaignManager.updateCampaign(campaign);
+    public Campaign updateCampaign(@RequestBody Campaign campaign, @RequestParam Long index){
+        return campaignManager.updateCampaign(campaign, index);
     }
 
     @DeleteMapping("/deleteCampaign")

@@ -29,7 +29,8 @@ public class CampaignManager {
         return campaignRepo.save(campaign);
     }
 
-    public Campaign updateCampaign(Campaign newCampaign) {
+    public Campaign updateCampaign(Campaign newCampaign, Long id) {
+        newCampaign.setCampaignId(id);
         return campaignRepo.save(newCampaign);
     }
 

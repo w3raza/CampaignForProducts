@@ -34,7 +34,8 @@ public class ProductManager {
         return productRepo.save(product);
     }
 
-    public Product updateProduct(Product newProduct) {
+    public Product updateProduct(Product newProduct, Long id) {
+        newProduct.setProductId(id);
         return productRepo.save(newProduct);
     }
 
@@ -44,19 +45,20 @@ public class ProductManager {
 
     public Product addCampaignToProduct(Long productId, Campaign campaign) {
         Optional<Product> optional = this.findProductById(productId);
-        campaign.setProduct(optional.get());
-        optional.get().assignCampaign(campaign);
+        optional.get().setCampaign(campaign);
+        campaign.setStatus(true);
         return productRepo.save(optional.get());
     }
 
-    public List<Campaign> getCampaignsFromProduct(Long productId) {
-
-        Optional<Product> optional = this.findProductById(productId);
-        return optional.get().getCampaigns();
-    }
+//    public Campaign getCampaignsFromProduct(Long productId) {
+//
+//        Optional<Product> optional = this.findProductById(productId);
+//        return optional.get();
+//    }
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDB(){
         addProduct(new Product(1L, "product1", new BigDecimal("1000")));
+        addProduct(new Product(2L, "product2", new BigDecimal("2000")));
     }
 }
