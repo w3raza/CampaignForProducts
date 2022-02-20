@@ -1,34 +1,34 @@
 import React, {useState, useEffect} from 'react'
-import {Link, useNavigate  } from 'react-router-dom';
+import {Link, useNavigate , useParams  } from 'react-router-dom';
 import ProductService from '../services/ProductService';
 
-const CreateProductComponent = () => {
+const UpdateProductComponent = () => {
     const [productName, setproductName] = useState('')
     const [productPrice, setproductPrice] = useState(0)
-    const [campaigns] = useState([])
+    const [campaigns, setcampaigns] = useState([])
+    const { id } = useParams();
     let navigate = useNavigate();
     
-   useEffect(() => {
-
-        // ProductService.getProductById(id).then((response) =>{
-        //     setproductName(response.data.productName)
-        //     setproductPrice(response.data.productPrice)
-        //     setcampaigns(response.data.campaigns)
-        // }).catch(error => {
-        //     console.log(error)
-        // })
-   })
+//    useEffect(() => {
+//         ProductService.getProductById(id).then((response) =>{
+//             setproductName(response.data.productName)
+//             setproductPrice(response.data.productPrice)
+//             setcampaigns(response.data.campaigns)
+//         }).catch(error => {
+//             console.log(error)
+//         })
+//    })
     
-    const saveProduct = (e) => {
+    const updateProduct = (e) => {
         e.preventDefault();
 
-        const product = {productName, productPrice, campaigns}
+        const product = {id, productName, productPrice, campaigns}
 
-            ProductService.addProducts(product).then((response) => {
+            ProductService.updateProduct(product).then((response) => {
                 navigate('/product', { replace: true })
             }).catch(error => {
                 console.log(error)
-            })
+            }) 
     }
 
     return (
@@ -38,7 +38,7 @@ const CreateProductComponent = () => {
                 <div className = "row">
                     <div className = "card col-md-6 offset-md-3 offset-md-3">
                        {
-                           <h2 className = "text-center">Add product</h2>
+                           <h2 className = "text-center">Update product</h2>
                        }
                         <div className = "card-body">
                             <form>
@@ -56,7 +56,7 @@ const CreateProductComponent = () => {
                                 </div>
 
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> Product Price :</label>
+                                    <label className = "form-label"> Last Name :</label>
                                     <input
                                         type = "number"
                                         placeholder = "Product Price"
@@ -68,7 +68,20 @@ const CreateProductComponent = () => {
                                     </input>
                                 </div>
 
-                                <button className = "btn btn-success" onClick = {(e) => saveProduct(e)} >Submit </button>
+                                <div className = "form-group mb-2">
+                                    <label className = "form-label"> Campaign :</label>
+                                    <input
+                                        type = "text"
+                                        placeholder = "Product Price"
+                                        name = "productPrice"
+                                        className = "form-control"
+                                        value = {campaigns}
+                                        onChange = {(e) => setcampaigns(e.target.value)}
+                                    >
+                                    </input>
+                                </div>
+
+                                <button className = "btn btn-success" onClick = {(e) => updateProduct(e)} >Submit </button>
                                 <Link to="/product" className="btn btn-danger"> Cancel </Link>
                             </form>
 
@@ -83,4 +96,4 @@ const CreateProductComponent = () => {
     
 }
 
-export default CreateProductComponent
+export default UpdateProductComponent

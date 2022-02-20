@@ -11,17 +11,17 @@ class ProductService {
     return axios.post(Product_URL + "/addProducts", Product);
   }
 
-  getProductById(ProductId) {
-    return axios.get(Product_URL + "/getProduct" + ProductId);
+  // getProductById(ProductId) {
+  //   return axios.get(Product_URL + "/getProduct" + ProductId);
+  // }
+
+  updateProduct(Product) {
+    return axios.put(Product_URL + "/updateProducts", Product);
   }
 
-  updateProduct(Product, ProductId) {
-    return axios.put(Product_URL + "/" + ProductId, Product);
+  deleteProduct(ProductId) {
+    return axios.delete(Product_URL + "/deleteProducts?index=" + ProductId);
   }
-
-  //   deleteProduct(ProductId) {
-  //     return axios.delete(Product_URL + "/" + ProductId);
-  //   }
 }
 
 export default new ProductService();

@@ -10,11 +10,18 @@ class ListProductComponent extends Component {
         this.state = {
                 products: []
         }
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     componentDidMount(){
         ProductService.getProducts().then((res) => {
             this.setState({ products: res.data});
+        });
+    }
+
+    deleteProduct(id){
+        ProductService.deleteProduct(id).then( res => {
+            this.setState({products: this.state.products.filter(product => product.productId !== id)});
         });
     }
 
@@ -46,9 +53,8 @@ class ListProductComponent extends Component {
                                              <td> {product.productPrice}</td>
                                              <td> {product.campaigns}</td>
                                              <td>
-                                                 <button onClick={ () => this.upgradeProduct(product.productId)} className="btn btn-info">Update </button>
-                                                 {/* <button style={{marginLeft: "10px"}} onClick={ () => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewEmployee(employee.id)} className="btn btn-info">View </button> */}
+                                                 <Link to = "/product/updateProduct/${product.productId}" className = "btn btn-primary mb-2" > update </Link>
+                                                <button style={{marginLeft: "10px"}} onClick={ () => this.deleteProduct(product.productId)} className="btn btn-danger">Delete </button>
                                              </td>
                                         </tr>
                                     )

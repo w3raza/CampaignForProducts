@@ -6,6 +6,7 @@ import Campaign from "./components/Campaign";
 import Nav from "./components/Nav";
 import FooterComponent from "./components/FooterComponent";
 import CreateProductComponent from "./components/CreateProductComponent";
+import UpdateProductComponent from "./components/UpdateProductComponent";
 
 function App() {
   return (
@@ -14,10 +15,14 @@ function App() {
         <Nav />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/product/*" element={<Product />} />
           <Route
             path="/product/addProduct"
             element={<CreateProductComponent />}
+          />
+          <Route
+            path="/product/updateProduct/:id"
+            element={<UpdateProductComponent />}
           />
           <Route path="/campaign" element={<Campaign />} />
         </Routes>
