@@ -13,7 +13,7 @@ public class Product {
     private BigDecimal productPrice;
 
     @OneToOne
-    @JoinColumn(name = "campaigns_campaign_id")
+    @JoinColumn(name = "campaignId")
     Campaign campaign;
 
     @Override

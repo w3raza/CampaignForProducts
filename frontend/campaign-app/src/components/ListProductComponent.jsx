@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProductService from '../services/ProductService';
 import CampaignService from '../services/CampaignService';
 import { Link } from 'react-router-dom'
-import Select from 'react-select'
+
 
 class ListProductComponent extends Component {
     
@@ -14,7 +14,6 @@ class ListProductComponent extends Component {
             campaigns: []
         }
         this.deleteProduct = this.deleteProduct.bind(this);
-        this.chooseOptions = this.chooseOptions.bind(this);
         this.addCampaignToProduct = this.addCampaignToProduct.bind(this);
     }
 
@@ -35,27 +34,16 @@ class ListProductComponent extends Component {
         });
     }
 
-    addCampaignToProduct(campaign) {
-        // ProductService.addCampaignToProduct(this.state.products.productId, campaign).then(res => {
-        //     this.setState({products:  res.data });  
+    addCampaignToProduct(campaign, id) {
+        // ProductService.addCampaignToProduct(id, campaign).then(res => {
+        //     this.setState({products: this.state.products.filter(product => product.productId !== id)});
         // });
-    }
-
-
-    chooseOptions = () => {
-        const select = document.createElement('select')
-        this.state.campaigns.forEach(element => {
-            select.innerHTML += `
-                <option value=${element.campaignName}>
-            `
-        });
-        // <Select options={this.options} />
     }
 
     render() {
         let campaignsList = this.state.campaigns.length > 0 && this.state.campaigns.map((item, i) => {
             return (
-                <option key={i} value={item.campaignId}>{item.campaignName}</option>
+                <option key={i} value={this.state.campaigns}>{item.campaignName}</option>
             )
         }, this);
         return (
@@ -84,8 +72,8 @@ class ListProductComponent extends Component {
                                              <td> { product.productName} </td>   
                                              <td> {product.productPrice}</td>
                                                 <td>
-                                                    <select onChange={this.addCampaignToProduct(this.value)}>
-                                                        <option></option>
+                                                    <select onChange={this.addCampaignToProduct(this.value, product.productId)}>
+                                                        <option value={this.state.campaigns}></option>
                                                         {campaignsList}
                                                     </select>
                                                     {/* <select id={product.productId}>
