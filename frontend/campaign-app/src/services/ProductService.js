@@ -15,8 +15,11 @@ class ProductService {
   //   return axios.get(Product_URL + "/getProduct" + ProductId);
   // }
 
-  updateProduct(Product) {
-    return axios.put(Product_URL + "/updateProducts", Product);
+  updateProduct(Product, ProductId) {
+    return axios.put(
+      Product_URL + "/updateProducts?index=" + ProductId,
+      Product
+    );
   }
 
   deleteProduct(ProductId) {

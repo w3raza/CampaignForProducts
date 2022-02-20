@@ -1,10 +1,14 @@
 import React from "react";
 import "../App.css";
+import { Route, Routes } from "react-router-dom";
+import ListCampaignComponent from "./ListCampaignComponent";
 
 function Campaign() {
   return (
     <div>
-      <h1>Campaigns</h1>
+      <Routes>
+        <Route path="/" element={<ListCampaignComponent />} />
+      </Routes>
     </div>
   );
 }

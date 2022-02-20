@@ -43,7 +43,7 @@ const CreateProductComponent = () => {
                         <div className = "card-body">
                             <form>
                                 <div className = "form-group mb-2">
-                                    <label className = "form-label"> First Name :</label>
+                                    <label className = "form-label"> Product Name :</label>
                                     <input
                                         type = "text"
                                         placeholder = "Product name"

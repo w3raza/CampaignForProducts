@@ -53,7 +53,7 @@ class ListProductComponent extends Component {
                                              <td> {product.productPrice}</td>
                                              <td> {product.campaigns}</td>
                                              <td>
-                                                 <Link to = "/product/updateProduct/${product.productId}" className = "btn btn-primary mb-2" > update </Link>
+                                                    <Link to={"/product/updateProduct/" + product.productId} className = "btn btn-primary mb-2" > update </Link>
                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteProduct(product.productId)} className="btn btn-danger">Delete </button>
                                              </td>
                                         </tr>

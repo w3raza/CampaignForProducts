@@ -1,30 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Link, useNavigate , useParams  } from 'react-router-dom';
 import ProductService from '../services/ProductService';
 
 const UpdateProductComponent = () => {
     const [productName, setproductName] = useState('')
     const [productPrice, setproductPrice] = useState(0)
-    const [campaigns, setcampaigns] = useState([])
+    const [campaigns] = useState([])
     const { id } = useParams();
     let navigate = useNavigate();
     
-//    useEffect(() => {
-//         ProductService.getProductById(id).then((response) =>{
-//             setproductName(response.data.productName)
-//             setproductPrice(response.data.productPrice)
-//             setcampaigns(response.data.campaigns)
-//         }).catch(error => {
-//             console.log(error)
-//         })
-//    })
-    
     const updateProduct = (e) => {
         e.preventDefault();
-
         const product = {id, productName, productPrice, campaigns}
 
-            ProductService.updateProduct(product).then((response) => {
+            ProductService.updateProduct(product, id).then((response) => {
                 navigate('/product', { replace: true })
             }).catch(error => {
                 console.log(error)
@@ -64,19 +53,6 @@ const UpdateProductComponent = () => {
                                         className = "form-control"
                                         value = {productPrice}
                                         onChange = {(e) => setproductPrice(e.target.value)}
-                                    >
-                                    </input>
-                                </div>
-
-                                <div className = "form-group mb-2">
-                                    <label className = "form-label"> Campaign :</label>
-                                    <input
-                                        type = "text"
-                                        placeholder = "Product Price"
-                                        name = "productPrice"
-                                        className = "form-control"
-                                        value = {campaigns}
-                                        onChange = {(e) => setcampaigns(e.target.value)}
                                     >
                                     </input>
                                 </div>
