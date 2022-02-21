@@ -7,4 +7,4 @@ This project have full stack development:
 - simple frontend in any JS framework React
 
 Looks:
-<img src="./img/campaignPage.png" width="128"/>
+![](img/campaignPage.png)
