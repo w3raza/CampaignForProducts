@@ -7,4 +7,4 @@ This project have full stack development:
 - simple frontend in any JS framework React
 
 Looks:
-![Alt text](../img/campaignPage.png?raw=true "Title")
+![plot](../img/campaignPage.png)
